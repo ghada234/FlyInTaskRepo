@@ -1,0 +1,62 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand">OPEN BOOK LIBRARY</a>
+    <form class="d-flex form">
+      <i class="fa fa-search"></i>
+      <input id="search-input"  [(ngModel)]="searchterm" type="search" name="search" id="form1" class="form-control  form-input mr-3" #searchElement 
+      />
+      <button class="btn btn-primary"(click)="onSearch(searchterm)">Search</button>
+      <button class="btn btn-secondary"(click)="onReset()">Reset</button>
+    
+    
+    </form>
+
+    
+
+
+  </div>
+</nav>
+
+
+
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+          <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+              <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <span class="fs-5 d-none d-sm-inline">Trending</span>
+              </a>
+              <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                  <li class="nav-item" *ngFor="let trend of trendingSubjects">
+                      <a href="#" class="nav-link align-middle px-0"  routerLink="/trending-subject/{{trend.name}}">
+                          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">{{trend.name}}</span>
+                      </a>
+                  </li>
+                 
+                  
+                
+                  
+              </ul>
+              <hr>
+           
+          </div>
+      </div>
+      <div class="col py-3">
+        <div *ngIf="books?.length>0" >
+          <app-table-view [BookListSearch]="books"></app-table-view>
+          <div class="row d-flex align-items-center">
+            <div></div>
+            <div class="col-md-4 text-dark text-center" style="font-weight: bold;color: #fff;">Show {{searchparams.limit}}  of 100</div>
+            <div class=" col-md-4">
+              <pagination [totalItems]="100" [itemsPerPage]="searchparams.limit" [(ngModel)]="searchparams.page" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+          </div>
+         
+</div>
+
+         
+       
+    
+      </div>
+  </div>
+</div>
